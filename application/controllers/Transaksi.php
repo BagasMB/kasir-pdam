@@ -1,0 +1,47 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Transaksi extends CI_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        if ($this->session->userdata('username') == null) {
+            redirect('auth');
+        } elseif ($this->session->userdata('user_role') != 'Kasir') {
+            redirect('auth/block');
+        }
+        $this->load->model('Transaksi_model');
+    }
+
+    public function index()
+    {
+        $data['title'] = 'Transaksi | Pembayaran';
+        $data['title_halaman'] = 'Pembayaran';
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['bayar'] = $this->Transaksi_model->getAllTransaksi();
+        if ($this->input->post('keyword')) {
+            $data['bayar'] = $this->Transaksi_model->cariDataTransaksi();
+        }
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('transaksi/index', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function bayar()
+    {
+        $this->form_validation->set_rules('bayar', 'Bayar', 'trim|required|numeric');
+
+        if ($this->form_validation->run() == true) {
+            $this->Transaksi_model->bayar();
+            $this->session->set_flashdata('flash', 'Berhasil DiBayar');
+            redirect('transaksi');
+        } else {
+            $this->session->set_flashdata('gagal', 'Gagal DiBayar');
+            redirect('transaksi');
+        }
+    }
+
+}
