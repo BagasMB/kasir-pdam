@@ -21,12 +21,7 @@ class User extends CI_Controller
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'akun' => $this->User_model->getAllUser()
         ];
-
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('user/index', $data);
-        $this->load->view('layout/footer');
+        $this->template->load('layout/template', 'user/index', $data);
     }
 
     public function tambahUser()

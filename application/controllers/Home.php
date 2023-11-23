@@ -23,11 +23,7 @@ class Home extends CI_Controller
 
 		];
 
-		$this->load->view('layout/header', $data);
-		$this->load->view('layout/sidebar', $data);
-		$this->load->view('layout/navbar', $data);
-		$this->load->view('dashboard', $data);
-		$this->load->view('layout/footer');
+		$this->template->load('layout/template', 'dashboard', $data);
 	}
 
 	public function laporan()

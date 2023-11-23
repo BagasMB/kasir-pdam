@@ -136,50 +136,6 @@
         </div>
         <!--/ Bordered Table -->
 
-        <!-- <div class="row row-cols-1 row-cols-md-2 g-4">
-            <?php
-            foreach ($akun as $kun) : ?>
-                <div class="col">
-                    <div class="card m-3" style="max-width: 540px;">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <a href="<?= base_url('assets/img/profile/') . $kun['image'] ?>" class="" data-fancybox="gallery">
-                                    <img src="<?= base_url('assets/img/profile/') . $kun['image'] ?>" class="img-thumbnail rounded-start">
-                                </a>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $kun['nama']; ?></h5>
-                                    <p class="card-text text-secondary">
-                                        Username : <?= $kun['username'] ?><br>  
-                                        Position : <?= $kun['user_role'] ?><br>
-                                        Status : <?php if ($kun['status'] == "Aktif") : ?>
-
-                                            <span class="badge bg-label-success me-1">
-                                                <?= $kun['status']; ?>
-                                            </span>
-
-                                        <?php elseif ($kun['status'] == "Mati") :  ?>
-
-                                            <span class="badge bg-label-danger me-1">
-                                                <?= $kun['status']; ?>
-                                            </span>
-
-                                        <?php endif; ?>
-                                    </p>
-                                    <p class="card-text"><small class="text-body-secondary">Date Create Akun <?= date('d F Y', $kun['date_created']) ?></small></p>
-                                    <div class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#modalEditUser<?= $kun['user_id']; ?>" name="edit">Edit</div>
-                                    <div id="btn-hapus" href="<?= base_url('admin/deleteUser/' . $kun['user_id']); ?>" class="badge bg-danger" name="delete">Delete</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            <?php endforeach; ?>
-        </div> -->
-
         <div class="modal fade" id="modalTambahUser" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

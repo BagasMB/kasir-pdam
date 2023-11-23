@@ -27,11 +27,7 @@ class PenggunaanAir extends CI_Controller
         $this->form_validation->set_rules('pemakaian_akhir', 'Pemakaian Akhir', 'trim|required|numeric');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('layout/header', $data);
-            $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/navbar', $data);
-            $this->load->view('penggunaanAir/index', $data);
-            $this->load->view('layout/footer');
+            $this->template->load('layout/template', 'penggunaanair/index', $data);
         } else {
             $this->PenggunaanAir_model->tambahDataPenggunaanAir();
             $this->session->set_flashdata('flash', 'Berhasil DiTambah');
@@ -53,11 +49,7 @@ class PenggunaanAir extends CI_Controller
         $this->form_validation->set_rules('pemakaian_akhir', 'Pemakaian Akhir', 'trim|required|numeric');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('layout/header', $data);
-            $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/navbar', $data);
-            $this->load->view('penggunaanAir/input', $data);
-            $this->load->view('layout/footer');
+            $this->template->load('layout/template', 'penggunaanAir/input', $data);
         } else {
             $this->PenggunaanAir_model->tambahDataPenggunaanAir();
             $this->session->set_flashdata('flash', 'Berhasil DiTambah');
@@ -73,11 +65,8 @@ class PenggunaanAir extends CI_Controller
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'bayar' => $this->PenggunaanAir_model->getPenggunaanAirSudahBayar()
         ];
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('penggunaanAir/sudahBayar', $data);
-        $this->load->view('layout/footer');
+
+        $this->template->load('layout/template', 'penggunaanAir/sudahBayar', $data);
     }
 
     public function belumBayar()
@@ -88,10 +77,7 @@ class PenggunaanAir extends CI_Controller
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'bayar' => $this->PenggunaanAir_model->getPenggunaanAirBelumBayar()
         ];
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('penggunaanAir/belumBayar', $data);
-        $this->load->view('layout/footer');
+        $this->template->load('layout/template', 'penggunaanAir/belumBayar', $data);
+
     }
 }

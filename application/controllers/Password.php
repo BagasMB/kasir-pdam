@@ -24,11 +24,7 @@ class Password extends CI_Controller
         $this->form_validation->set_rules('password_baru2', 'Konfirmasi Password Baru', 'trim|required|matches[password_baru1]');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('layout/header', $data);
-            $this->load->view('layout/sidebar', $data);
-            $this->load->view('layout/navbar', $data);
-            $this->load->view('ubahPassword', $data);
-            $this->load->view('layout/footer');
+            $this->template->load('layout/template', 'ubahPassword', $data);
         } else {
             $user_id = $this->input->post('user_id');
             $password_lama = $this->input->post('password_lama');

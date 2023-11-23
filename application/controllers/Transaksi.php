@@ -23,11 +23,8 @@ class Transaksi extends CI_Controller
         if ($this->input->post('keyword')) {
             $data['bayar'] = $this->Transaksi_model->cariDataTransaksi();
         }
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('transaksi/index', $data);
-        $this->load->view('layout/footer');
+        $this->template->load('layout/template', 'transaksi/index', $data);
+
     }
 
     public function bayar()

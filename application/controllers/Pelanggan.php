@@ -18,11 +18,7 @@ class Pelanggan extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
         $data['pelanggan'] = $this->Pelanggan_model->getAllPelanggan();
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('pelanggan/index', $data);
-        $this->load->view('layout/footer');
+        $this->template->load('layout/template', 'pelanggan/index', $data);
     }
 
     public function tambah()

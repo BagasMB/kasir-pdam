@@ -14,7 +14,7 @@ class MyProfile extends CI_Controller
 
     public function index()
     {
-        $dat = [
+        $data = [
             'title' => 'Account | My Profile',
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'akun' => $this->User_model->getAllUser()
@@ -24,11 +24,7 @@ class MyProfile extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'required');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('layout/header', $dat);
-            $this->load->view('layout/sidebar', $dat);
-            $this->load->view('layout/navbar', $dat);
-            $this->load->view('myProfile', $dat);
-            $this->load->view('layout/footer');
+            $this->template->load('layout/template', 'myprofile', $data);
         } else {
             $user_id = $this->input->post('user_id');
             $username = $this->input->post('username');
