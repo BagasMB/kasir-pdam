@@ -62,8 +62,8 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modalEditUser<?= $kun['user_id']; ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                 <div class="dropdown-item" id="btn-hapus" href="<?= base_url('user/deleteUser/' . $kun['user_id']); ?>"><i class="bx bx-trash me-1"></i> Delete</di>
+                                                </div>
                                             </div>
-                                        </div>
                                     </td>
                                 </tr>
 
@@ -184,7 +184,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel3">Edit Data User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel3">Tambah Data User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="<?= base_url('user/tambahUser') ?>" method="post">

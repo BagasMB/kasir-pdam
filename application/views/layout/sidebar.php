@@ -42,14 +42,14 @@
                     </li>
 
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Penggunaan Air</span></li>
-                    <li class="menu-item <?php if ($menu == 'penggunaanair') {
+                    <!-- <li class="menu-item <?php if ($menu == 'penggunaanair') {
                                                 echo "active";
                                             } ?>">
                         <a href="<?= base_url('penggunaanair') ?>" class="menu-link">
                             <i class="menu-icon tf-icons fa-solid fa-people-line"></i>
                             <div data-i18n="Analytics">Penggunaan Air</div>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="menu-item  <?php if ($menu2 == 'input') {
                                                 echo "active";
                                             } ?>">

@@ -44,4 +44,12 @@ class Transaksi extends CI_Controller
         }
     }
 
+    public function print_pembayaran($transaksi_id)
+    {
+        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['bayar'] = $this->Transaksi_model->getByIdTransaksi($transaksi_id);
+
+        $this->load->view('transaksi/print_pembayaran', $data);
+    }
+
 }
