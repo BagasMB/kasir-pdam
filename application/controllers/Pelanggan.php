@@ -25,6 +25,8 @@ class Pelanggan extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         $this->form_validation->set_rules('dusun', 'Dusun', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('no_wa', 'No Wa', 'trim|required');
         $this->form_validation->set_rules('rt', 'Rt', 'trim|required');
         $this->form_validation->set_rules('rw', 'Rw', 'trim|required');
         $this->form_validation->set_rules('desa', 'Desa', 'trim|required');
@@ -46,6 +48,8 @@ class Pelanggan extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
         $this->form_validation->set_rules('dusun', 'Dusun', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('no_wa', 'No Wa', 'trim|required');
         $this->form_validation->set_rules('rt', 'Rt', 'trim|required');
         $this->form_validation->set_rules('rw', 'Rw', 'trim|required');
         $this->form_validation->set_rules('desa', 'Desa', 'trim|required');

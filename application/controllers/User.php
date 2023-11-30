@@ -37,8 +37,8 @@ class User extends CI_Controller
             'required' => 'Nama Tidak Boleh Kosong'
         ]);
 
-        $data['title'] = 'Tambah | User';
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        // $data['title'] = 'Tambah | User';
+        // $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $username = $this->input->post('username');
         $cek_username = $this->db->where('username', $username)->count_all_results('user');
 
@@ -50,7 +50,6 @@ class User extends CI_Controller
             redirect('user');
         } else {
             $adduser = [
-                'username' => $this->input->post('username', true),
                 'username' => $this->input->post('username', true),
                 'password' => $this->input->post('password', true),
                 'image' => 'default.png',
@@ -68,7 +67,6 @@ class User extends CI_Controller
 
     public function editUser()
     {
-
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'required|matches[password]');
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required');

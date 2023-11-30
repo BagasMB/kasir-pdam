@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Nov 2023 pada 12.52
+-- Waktu pembuatan: 30 Nov 2023 pada 23.59
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.0.28
 
@@ -31,6 +31,8 @@ CREATE TABLE `pelanggan` (
   `pelanggan_id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `no_wa` varchar(50) NOT NULL,
   `dusun` varchar(30) NOT NULL,
   `rt` int(5) NOT NULL,
   `rw` int(5) NOT NULL,
@@ -45,9 +47,9 @@ CREATE TABLE `pelanggan` (
 -- Dumping data untuk tabel `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `jenis_kelamin`, `dusun`, `rt`, `rw`, `desa`, `kecamatan`, `kabupaten`, `kategori`, `meter_awal`) VALUES
-(1, 'Bagass', 'Laki-Laki', 'Padangan', 1, 7, 'Jungke', 'Karanganyar', 'Karanganyar', 'R-01', 1111),
-(2, 'YGYG', 'Perempuan', 'Opo', 76, 767, 'hvh', 'vhv', 'hhv', 'R-01', 12);
+INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `jenis_kelamin`, `email`, `no_wa`, `dusun`, `rt`, `rw`, `desa`, `kecamatan`, `kabupaten`, `kategori`, `meter_awal`) VALUES
+(1, 'Bagass', 'Laki-Laki', 'bagasmahardikabudi2007@gmail.com', '0812345678', 'Padangan', 1, 7, 'Jungke', 'Karanganyar', 'Karanganyar', 'R-01', 1111),
+(2, 'YGYG', 'Perempuan', 'cobaan@gmail.com', '1234567890', 'Opo', 76, 767, 'hvh', 'vhv', 'hhv', 'R-01', 12);
 
 -- --------------------------------------------------------
 
@@ -155,8 +157,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `image`, `status`, `user_role`, `date_created`) VALUES
 (1, 'admin', 'ya', 'Bagass', '_2f8ee1d8-cb5d-4913-a81e-9a61eede8eea.jpeg', 'Aktif', 'Admin', 1687042748),
 (2, 'kasir', 'ya', 'Radityo', 'default.png', 'Aktif', 'Kasir', 1687042748),
-(7, 'mager', 'ya', 'Pak Budii', 'default.png', 'Aktif', 'Manager', 1687042748),
-(8, 'yono', 'ya', 'Zeee', 'zee.jpg', 'Aktif', 'Petugas', 1687042748);
+(21, 'admin1', '123', 'cgfghh', 'default.png', 'Aktif', 'Kasir', 1700789512);
 
 --
 -- Indexes for dumped tables
@@ -224,7 +225,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

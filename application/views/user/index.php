@@ -64,6 +64,7 @@
                                                 <div class="dropdown-item" id="btn-hapus" href="<?= base_url('user/deleteUser/' . $kun['user_id']); ?>"><i class="bx bx-trash me-1"></i> Delete</di>
                                                 </div>
                                             </div>
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -109,9 +110,9 @@
                                                             <select class="form-select" name="user_role">
                                                                 <option selected><?= $kun['user_role'] ?></option>
                                                                 <option value="Kasir">Kasir</option>
-                                                                <option value="Manager">Manager</option>
+                                                                <!-- <option value="Manager">Manager</option> -->
                                                                 <option value="Admin">Admin</option>
-                                                                <option value="Petugas Pencatat Meteran">Petugas Pencatat Meteran</option>
+                                                                <!-- <option value="Petugas Pencatat Meteran">Petugas Pencatat Meteran</option> -->
                                                             </select>
                                                         </div>
                                                     </div>
@@ -172,9 +173,9 @@
                                     <label class="form-label">User Role</label>
                                     <select class="form-select" name="user_role">
                                         <option value="Kasir">Kasir</option>
-                                        <option value="Manager">Manager</option>
+                                        <!-- <option value="Manager">Manager</option> -->
                                         <option value="Admin">Admin</option>
-                                        <option value="Petugas Pencatat Meteran">Petugas Pencatat Meteran</option>
+                                        <!-- <option value="Petugas Pencatat Meteran">Petugas Pencatat Meteran</option> -->
                                     </select>
                                 </div>
                             </div>

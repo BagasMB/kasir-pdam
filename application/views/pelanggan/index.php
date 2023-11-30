@@ -122,6 +122,16 @@
                                                               </select>
                                                           </div>
                                                       </div>
+                                                      <div class="row mb-3 g-2">
+                                                          <div class="col">
+                                                              <label for="email" class="form-label">Email</label>
+                                                              <input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" value="<?= $pel['email']; ?>" autocomplete="off">
+                                                          </div>
+                                                          <div class="col">
+                                                              <label for="no_wa" class="form-label">No WhatsApp</label>
+                                                              <input type="text" name="no_wa" id="no_wa" class="form-control" placeholder="No WhatsApp" value="<?= $pel['no_wa']; ?>" autocomplete="off">
+                                                          </div>
+                                                      </div>
                                                       <div class="row mb-3">
                                                           <div class="col">
                                                               <label for="dusun" class="form-label">Dusun</label>
@@ -202,6 +212,16 @@
                                                               <option value="Laki-Laki">Laki-Laki</option>
                                                               <option value="Perempuan">Perempuan</option>
                                                           </select>
+                                                      </div>
+                                                  </div>
+                                                  <div class="row mb-3 g-2">
+                                                      <div class="col">
+                                                          <label for="email" class="form-label">Email</label>
+                                                          <input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" autocomplete="off">
+                                                      </div>
+                                                      <div class="col">
+                                                          <label for="no_wa" class="form-label">No WhatsApp</label>
+                                                          <input type="text" name="no_wa" id="no_wa" class="form-control" placeholder="No WhatsApp" autocomplete="off">
                                                       </div>
                                                   </div>
                                                   <div class="row mb-3">
