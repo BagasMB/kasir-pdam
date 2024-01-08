@@ -40,42 +40,33 @@
                             <div data-i18n="Analytics">Daftar Pelanggan</div>
                         </a>
                     </li>
-
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Penggunaan Air</span></li>
-                    <!-- <li class="menu-item <?php if ($menu == 'penggunaanair') {
-                                                echo "active";
-                                            } ?>">
-                        <a href="<?= base_url('penggunaanair') ?>" class="menu-link">
-                            <i class="menu-icon tf-icons fa-solid fa-people-line"></i>
-                            <div data-i18n="Analytics">Penggunaan Air</div>
-                        </a>
-                    </li> -->
-                    <li class="menu-item  <?php if ($menu2 == 'input') {
-                                                echo "active";
-                                            } ?>">
-                        <a href="<?= base_url('penggunaanair/input') ?>" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Analytics">Input Penggunaan</div>
-                        </a>
-                    </li>
-                    <li class="menu-item  <?php if ($menu2 == 'sudahBayar') {
-                                                echo "active";
-                                            } ?>">
-                        <a href="<?= base_url('penggunaanair/sudahBayar') ?>" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Analytics">Sudah Bayar</div>
-                        </a>
-                    </li>
-                    <li class="menu-item <?php if ($menu2 == 'belumBayar') {
-                                                echo "active";
-                                            } ?>">
-                        <a href="<?= base_url('penggunaanair/belumBayar') ?>" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Analytics">Belum Bayar</div>
-                        </a>
-                    </li>
-
                     <?php if ($user['user_role'] == 'Kasir') : ?>
+                        <li class="menu-header small text-uppercase"><span class="menu-header-text">Penggunaan Air</span></li>
+                        <li class="menu-item  <?php if ($menu2 == 'input') {
+                                                    echo "active";
+                                                } ?>">
+                            <a href="<?= base_url('penggunaanair/input') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-detail"></i>
+                                <div data-i18n="Analytics">Input Penggunaan</div>
+                            </a>
+                        </li>
+                        <li class="menu-item  <?php if ($menu2 == 'sudahBayar') {
+                                                    echo "active";
+                                                } ?>">
+                            <a href="<?= base_url('penggunaanair/sudahBayar') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-detail"></i>
+                                <div data-i18n="Analytics">Sudah Bayar</div>
+                            </a>
+                        </li>
+                        <li class="menu-item <?php if ($menu2 == 'belumBayar') {
+                                                    echo "active";
+                                                } ?>">
+                            <a href="<?= base_url('penggunaanair/belumBayar') ?>" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-detail"></i>
+                                <div data-i18n="Analytics">Belum Bayar</div>
+                            </a>
+                        </li>
+
                         <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
                         <li class="menu-item <?php if ($menu == 'transaksi') {
                                                     echo "active";
