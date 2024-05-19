@@ -60,7 +60,7 @@ INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `jenis_kelamin`, `email`, `no_w
 CREATE TABLE `penggunaan_air` (
   `pengair_id` int(11) NOT NULL,
   `pelanggan_id` int(11) NOT NULL,
-  `pemakaian_perbulan` date NOT NULL DEFAULT current_timestamp(),
+  `pemakaian_perbulan` date NOT NULL,
   `pemakaian_awal` int(11) NOT NULL,
   `pemakaian_akhir` int(11) NOT NULL,
   `status_pembayaran` enum('Sudah DiBayar','Belum Bayar') NOT NULL
@@ -111,8 +111,8 @@ CREATE TABLE `transaksi` (
   `transaksi_id` int(20) NOT NULL,
   `pelanggan_id` int(20) NOT NULL,
   `pengair_id` int(11) NOT NULL,
-  `jam_transaksi` time NOT NULL DEFAULT current_timestamp(),
-  `tanggal_transaksi` date NOT NULL DEFAULT current_timestamp(),
+  `jam_transaksi` time NOT NULL,
+  `tanggal_transaksi` date NOT NULL,
   `total_pembayaran` double NOT NULL,
   `bayar` int(11) NOT NULL,
   `kembalian` int(11) NOT NULL
