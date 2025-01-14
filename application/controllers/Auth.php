@@ -19,7 +19,7 @@ class Auth extends CI_Controller
         ]);
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/index');
+            $this->load->view('auth/login');
         } else {
             $this->_login();
         }
@@ -61,8 +61,8 @@ class Auth extends CI_Controller
         redirect('auth');
     }
 
-    public function block(){
+    public function block()
+    {
         $this->load->view('auth/error');
     }
-
 }

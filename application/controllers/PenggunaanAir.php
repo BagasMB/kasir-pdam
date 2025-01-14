@@ -8,7 +8,7 @@ class PenggunaanAir extends CI_Controller
         parent::__construct();
         if ($this->session->userdata('username') == null) {
             redirect('auth');
-        } 
+        }
         $this->load->model('PenggunaanAir_model');
         $this->load->model('Pelanggan_model');
     }
@@ -27,7 +27,7 @@ class PenggunaanAir extends CI_Controller
         $this->form_validation->set_rules('pemakaian_akhir', 'Pemakaian Akhir', 'trim|required|numeric');
 
         if ($this->form_validation->run() == false) {
-            $this->template->load('layout/template', 'penggunaanair/index', $data);
+            $this->template->load('layout/template', 'penggunaanair/penggunaanAir', $data);
         } else {
             $this->PenggunaanAir_model->tambahDataPenggunaanAir();
             $this->session->set_flashdata('flash', 'Berhasil DiTambah');
@@ -78,6 +78,5 @@ class PenggunaanAir extends CI_Controller
             'bayar' => $this->PenggunaanAir_model->getPenggunaanAirBelumBayar()
         ];
         $this->template->load('layout/template', 'penggunaanAir/belumBayar', $data);
-
     }
 }

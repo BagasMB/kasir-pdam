@@ -23,8 +23,7 @@ class Transaksi extends CI_Controller
         if ($this->input->post('keyword')) {
             $data['bayar'] = $this->Transaksi_model->cariDataTransaksi();
         }
-        $this->template->load('layout/template', 'transaksi/index', $data);
-
+        $this->template->load('layout/template', 'transaksi/transaksi', $data);
     }
 
     public function bayar()
@@ -48,5 +47,4 @@ class Transaksi extends CI_Controller
 
         $this->load->view('transaksi/print_pembayaran', $data);
     }
-
 }
