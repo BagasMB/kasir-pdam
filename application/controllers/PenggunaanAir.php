@@ -18,43 +18,42 @@ class PenggunaanAir extends CI_Controller
         $data = [
             'title' => 'Penggunaan Air',
             'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
-            'pelangan' => $this->db->get('pelanggan')->result_array()
+            'pelangan' => $this->db->get('pelanggan')->result()
         ];
+        $this->template->load('layout/template', 'penggunaanair/penggunaanAir', $data);
+    }
 
-        $this->form_validation->set_rules('pelanggan_id', 'Id Pelanggan', 'trim|required|numeric');
-        $this->form_validation->set_rules('pemakaian_awal', 'Pemakaian Awal', 'trim|required|numeric');
-        $this->form_validation->set_rules('pemakaian_akhir', 'Pemakaian Akhir', 'trim|required|numeric');
+    public function getPelangganData($nomor_pelanggan)
+    {
+        $pelanggan = $this->db->join('tarif', "pelanggan.kategori=tarif.tarif_id")->get_where('pelanggan', ['nomor_pelanggan' => $nomor_pelanggan])->row();
 
-        if ($this->form_validation->run() == false) {
-            $this->template->load('layout/template', 'penggunaanair/penggunaanAir', $data);
+        // Kembalikan data pelanggan dalam format JSON
+        if ($pelanggan) {
+            echo json_encode($pelanggan);
         } else {
-            $this->PenggunaanAir_model->tambahDataPenggunaanAir();
-            $this->session->set_flashdata('flash', 'Berhasil DiTambah');
-            redirect('penggunaanair/belumBayar');
+            echo json_encode(null);
         }
     }
 
+
     public function input()
     {
-        $data = [
-            'title' => 'Penggunaan Air | Input',
-            'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
-            'pelangan' => $this->db->get('pelanggan')->result_array()
-        ];
-
-        $this->form_validation->set_rules('pelanggan_id', 'Id Pelanggan', 'trim|required|numeric');
-        $this->form_validation->set_rules('pemakaian_awal', 'Pemakaian Awal', 'trim|required|numeric');
         $this->form_validation->set_rules('pemakaian_akhir', 'Pemakaian Akhir', 'trim|required|numeric');
 
+        $this->load->model('Pelanggan_model');
+        $getPelanggan =   $this->Pelanggan_model->getDetailPelanggan($this->input->post('nomor_pelanggan'));
+        // var_dump($getPelanggan->meter_awal);die;
+
         if ($this->form_validation->run() == false) {
-            $this->template->load('layout/template', 'penggunaanAir/input', $data);
+            $this->session->set_flashdata('gagal', 'Data Belum di isi');
+        } elseif ($getPelanggan->meter_awal >= $this->input->post('pemakaian_akhir')) {
+            $this->session->set_flashdata('gagal', 'Data penggunaan akhir kurang dari penggunaan saat ini');
+            redirect('penggunaanAir');
         } else {
-            $this->PenggunaanAir_model->tambahDataPenggunaanAir();
+            $this->PenggunaanAir_model->tambahDataPenggunaanAir($getPelanggan);
             $this->session->set_flashdata('flash', 'Berhasil DiTambah');
-            redirect('penggunaanair/belumBayar');
         }
+        redirect('penggunaanAir/belumBayar');
     }
 
     public function sudahBayar()
@@ -62,11 +61,10 @@ class PenggunaanAir extends CI_Controller
         $data = [
             'title' => 'Penggunaan Air | Sudah Bayar',
             'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'bayar' => $this->PenggunaanAir_model->getPenggunaanAirSudahBayar()
         ];
 
-        $this->template->load('layout/template', 'penggunaanAir/sudahBayar', $data);
+        $this->template->load('layout/template', 'penggunaanAir/dataPenggunaanAir', $data);
     }
 
     public function belumBayar()
@@ -74,9 +72,8 @@ class PenggunaanAir extends CI_Controller
         $data = [
             'title' => 'Penggunaan Air | Belum Bayar',
             'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'bayar' => $this->PenggunaanAir_model->getPenggunaanAirBelumBayar()
         ];
-        $this->template->load('layout/template', 'penggunaanAir/belumBayar', $data);
+        $this->template->load('layout/template', 'penggunaanAir/dataPenggunaanAir', $data);
     }
 }

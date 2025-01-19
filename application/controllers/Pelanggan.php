@@ -14,11 +14,25 @@ class Pelanggan extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Pelanggan';
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
+        $data = [
+            'title'     => 'Pelanggan',
+            'pelanggan' => $this->Pelanggan_model->getAllPelanggan(),
+            'tarif'     => $this->db->get('tarif')->result()
+        ];
 
-        $data['pelanggan'] = $this->Pelanggan_model->getAllPelanggan();
         $this->template->load('layout/template', 'user/pelanggan', $data);
+    }
+
+    public function detail($nomor_pelanggan)
+    {
+        $this->load->model("Transaksi_model");
+        $data = [
+            'title'     => 'Detail Pelanggan',
+            'pelanggan' => $this->Pelanggan_model->getDetailPelanggan($nomor_pelanggan),
+            'transaksi' => $this->Transaksi_model->getTransaksiByUser($nomor_pelanggan),
+        ];
+
+        $this->template->load('layout/template', 'user/detailPelanggan', $data);
     }
 
     public function tambah()

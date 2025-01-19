@@ -2,11 +2,6 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account /</span> Admin</h4> -->
 
-
-    <div id="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-    <div id="type-error" data-flashdata="<?= $this->session->flashdata('gagal'); ?>"></div>
-
-
     <!-- Basic with Icons -->
     <div class="col-xxl">
         <div class="card mb-4">
@@ -15,7 +10,7 @@
             </div>
             <div class="card-body">
                 <?= form_open_multipart('password') ?>
-                <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
+                <input type="hidden" name="user_id" value="<?= $this->session->userdata('user_id'); ?>">
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label" for="password-lama">Password Lama</label>
                     <div class="col-sm-4">

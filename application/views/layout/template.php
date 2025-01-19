@@ -54,12 +54,21 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?= base_url('') ?>assets/js/config.js"></script>
+    <!-- select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous">
+
+    <!-- select2-bootstrap4-theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url(''); ?>assets/css/select2-bootstrap4.css">
 </head>
 
 <body>
+    <div id="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
+    <div id="type-error" data-flashdata="<?= $this->session->flashdata('gagal'); ?>"></div>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
+
             <?php $this->load->view('layout/sidebar'); ?>
             <!-- Layout container -->
             <div class="layout-page">
@@ -127,8 +136,104 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="<?= base_url(''); ?>assets/js/sweetalert/sweetalert2.all.min.js"></script>
-    <script src="<?= base_url(''); ?>assets/js/myscript.js"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha256-7dA7lq5P94hkBsWdff7qobYkp9ope/L5LQy2t/ljPLo=" crossorigin="anonymous"></script>
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js" integrity="sha256-AFAYEOkzB6iIKnTYZOdUf9FFje6lOTYdwRJKwTN5mks=" crossorigin="anonymous"></script>
+
+    <script src="<?= base_url(''); ?>assets/js/myscript.js"></script>
+    <script>
+        $(function() {
+            // Inisialisasi select2
+            $('#select-pelanggan').each(function() {
+                $(this).select2({
+                    theme: 'bootstrap4',
+                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                    placeholder: $(this).data('placeholder'),
+                    allowClear: Boolean($(this).data('allow-clear')),
+                    closeOnSelect: !$(this).attr('multiple'),
+                });
+
+                // Tambahkan event change untuk mengambil data pelanggan
+                $(this).on('change', function() {
+                    const nomorPelanggan = $(this).val();
+                    const dataPelangganContainer = $('#data-pelanggan');
+
+                    if (!nomorPelanggan) {
+                        dataPelangganContainer.html('<p class="d-flex justify-content-center">Silakan pilih pelanggan untuk menampilkan data.</p>');
+                        return; // Hentikan proses jika pelanggan tidak dipilih
+                    }
+
+                    if (nomorPelanggan) {
+                        $.ajax({
+                            url: `<?= base_url('penggunaanair/getPelangganData/'); ?>${nomorPelanggan}`,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(data) {
+                                if (data) {
+                                    dataPelangganContainer.html(`
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td>Nomor Pelanggan</td>
+                                            <td>:</td>
+                                            <td>${data.nomor_pelanggan}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nama</td>
+                                            <td>:</td>
+                                            <td>${data.nama}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jenis Kelamin</td>
+                                            <td>:</td>
+                                            <td>${data.jenis_kelamin}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>:</td>
+                                            <td>${data.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>No Telp/WA</td>
+                                            <td>:</td>
+                                            <td>${data.no_wa}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alamat</td>
+                                            <td>:</td>
+                                            <td>${data.dusun}, RT ${data.rt} / RW ${data.rw}, ${data.desa}, ${data.kecamatan}, Kab. ${data.kabupaten}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kategori</td>
+                                            <td>:</td>
+                                            <td>${data.nama_tarif}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Meteran Awal</td>
+                                            <td>:</td>
+                                            <td>${data.meter_awal}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            `);
+                                } else {
+                                    dataPelangganContainer.html('<p>Data pelanggan tidak ditemukan.</p>');
+                                }
+                            },
+                            error: function() {
+                                dataPelangganContainer.html('<p>Terjadi kesalahan saat mengambil data pelanggan.</p>');
+                            },
+                        });
+                    } else {
+                        dataPelangganContainer.html('<p>Silakan pilih pelanggan untuk menampilkan data.</p>');
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json`)
             .then(response => response.json())

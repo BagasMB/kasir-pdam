@@ -1,7 +1,4 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div id="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-    <div id="type-error" data-flashdata="<?= $this->session->flashdata('gagal'); ?>"></div>
-
     <!-- Bordered Table -->
     <div class="card card-responsive">
         <div class="card-header d-flex align-items-center justify-content-between">
@@ -20,7 +17,7 @@
                             <th>#</th>
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
-                            <th>Alamat</th>
+                            <!-- <th>Alamat</th> -->
                             <th>Kategori</th>
                             <th>Meteran Awal</th>
                             <th>Actions</th>
@@ -31,60 +28,28 @@
                         $i = 1;
                         foreach ($pelanggan as $pel) : ?>
                             <tr>
-                                <td><?= $pel['pelanggan_id']; ?></td>
+                                <td><?= $pel['nomor_pelanggan']; ?></td>
                                 <td><?= $pel['nama']; ?></td>
                                 <td>
-                                    <?php if ($pel['jenis_kelamin'] == "Laki-Laki") : ?>
-                                        <i class='bx bx-male text-info me-1'></i><?= $pel['jenis_kelamin']; ?>
-                                    <?php elseif ($pel['jenis_kelamin'] == "Perempuan") : ?>
-                                        <i class='bx bx-female text-danger me-1'></i></i><?= $pel['jenis_kelamin']; ?>
-                                    <?php endif; ?>
+                                    <i class='bx <?= $pel['jenis_kelamin'] == "Laki-Laki" ? "bx-male text-info" : ($pel['jenis_kelamin'] == "Perempuan" ? "bx-female text-danger" : "bx-body"); ?> me-1'></i><?= $pel['jenis_kelamin']; ?>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <?= $pel['dusun']; ?>,
                                     RT 0<?= $pel['rt']; ?> / 0<?= $pel['rw']; ?>,
                                     <?= $pel['desa']; ?>,
                                     <?= $pel['kecamatan']; ?>,
                                     Kab. <?= $pel['kabupaten']; ?>
-                                </td>
-                                <td>
-                                    <?php if ($pel['kategori'] == "R-01") : ?>
-
-                                        <span class="badge bg-label-success me-1">
-                                            <?= $pel['kategori']; ?>
-                                        </span>
-
-                                    <?php elseif ($pel['kategori'] == "R-02") :  ?>
-
-                                        <span class="badge bg-label-warning me-1">
-                                            <?= $pel['kategori']; ?>
-                                        </span>
-
-                                    <?php elseif ($pel['kategori'] == "K-01") :  ?>
-
-                                        <span class="badge bg-label-primary me-1">
-                                            <?= $pel['kategori']; ?>
-                                        </span>
-
-                                    <?php elseif ($pel['kategori'] == "K-02") :  ?>
-
-                                        <span class="badge bg-label-info me-1">
-                                            <?= $pel['kategori']; ?>
-                                        </span>
-
-                                    <?php endif; ?>
-                                </td>
+                                </td> -->
+                                <td><?= $pel['nama_tarif']; ?></td>
                                 <td><?= $pel['meter_awal']; ?></td>
                                 <td>
-                                    <div class="dropdown text-center">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modalEditPelanggan<?= $pel['pelanggan_id']; ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <span class="dropdown-item btn" href="<?= base_url('pelanggan/delete/') . $pel['pelanggan_id'] ?>" id="btn-hapus" name="delete"><i class="bx bx-trash me-1"></i> Delete</span>
-                                        </div>
-                                    </div>
+                                    <a href="<?= base_url('pelanggan/detail/' . $pel['nomor_pelanggan']); ?>" type="button" class="btn btn-primary btn-sm">
+                                        <i class='bx bx-info-circle'></i>
+                                    </a>
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditPelanggan<?= $pel['pelanggan_id']; ?>">
+                                        <i class="bx bx-edit"></i>
+                                    </button>
+                                    <a id="btn-hapus" class="btn btn-danger btn-sm" href="<?= base_url('pelanggan/delete/') . $pel['pelanggan_id'] ?>" name="delete"><i class="bx bx-trash"></i></a>
                                 </td>
                             </tr>
 
@@ -94,7 +59,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel3">Input Data Pelanggan</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel3">Edit Data Pelanggan</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <form action="<?= base_url('Pelanggan/edit') ?>" method="post">
@@ -108,12 +73,9 @@
                                                     <div class="col">
                                                         <label class="col-md-3 form-label" for="basic-icon-default-status">Jenis Kelamin</label>
                                                         <select class="form-select" name="jenis_kelamin" id="exampleFormControlSelect1" aria-describedby="basic-icon-default-status">
-                                                            <option <?php if ($pel['jenis_kelamin'] == 'Laki-Laki') {
-                                                                        echo "selected";
-                                                                    } ?> value="Laki-Laki">Laki-Laki</option>
-                                                            <option <?php if ($pel['jenis_kelamin'] == 'Perempuan') {
-                                                                        echo "selected";
-                                                                    } ?> value="Perempuan">Perempuan</option>
+                                                            <option <?= $pel['jenis_kelamin'] == 'Laki-Laki' ? "selected" : ""; ?> value="Laki-Laki">Laki-Laki</option>
+                                                            <option <?= $pel['jenis_kelamin'] == 'Perempuan' ? "selected" : ""; ?> value="Perempuan">Perempuan</option>
+                                                            <option <?= $pel['jenis_kelamin'] == 'Umum' ? "selected" : ""; ?> value="Umum">Umum</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -159,18 +121,9 @@
                                                     <div class="col">
                                                         <label class="col-md-3 form-label" for="basic-icon-default-status">kategori Pelanggan</label>
                                                         <select class="form-select" name="kategori" id="exampleFormControlSelect1" aria-describedby="basic-icon-default-status">
-                                                            <option <?php if ($pel['kategori'] == 'R-01') {
-                                                                        echo "selected";
-                                                                    } ?> value="R-01">R-01 (Standar)</option>
-                                                            <option <?php if ($pel['kategori'] == 'R-02') {
-                                                                        echo "selected";
-                                                                    } ?> value="R-02">R-02 (Keluarga Miskin)</option>
-                                                            <option <?php if ($pel['kategori'] == 'K-01') {
-                                                                        echo "selected";
-                                                                    } ?> value="K-01">K-01 (Dinas/Instansi)</option>
-                                                            <option <?php if ($pel['kategori'] == 'K-02') {
-                                                                        echo "selected";
-                                                                    } ?> value="K-02">K-02 (Tempat Ibadah)</option>
+                                                            <?php foreach ($tarif as $value) : ?>
+                                                                <option value="<?= $value->tarif_id; ?>" <?= $pel['kategori'] == $value->tarif_id ? "selected" : ""; ?>><?= $value->nama_tarif; ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -206,6 +159,7 @@
                                                         <option selected>Select Menu</option>
                                                         <option value="Laki-Laki">Laki-Laki</option>
                                                         <option value="Perempuan">Perempuan</option>
+                                                        <option value="Umum">Umum</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -279,11 +233,9 @@
                                                 <div class="col">
                                                     <label class="col-md-3 form-label" for="basic-icon-default-status">kategori Pelanggan</label>
                                                     <select class="form-select" name="kategori" id="exampleFormControlSelect1" aria-describedby="basic-icon-default-status">
-                                                        <option selected>Select Menu</option>
-                                                        <option value="R-01">R-01 (Standar)</option>
-                                                        <option value="R-02">R-02 (Keluarga Miskin)</option>
-                                                        <option value="K-01">K-01 (Dinas/Instansi)</option>
-                                                        <option value="K-02">K-02 (Tempat Ibadah)</option>
+                                                        <?php foreach ($tarif as $value) : ?>
+                                                            <option value="<?= $value->tarif_id; ?>"><?= $value->nama_tarif; ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                 </div>
                                             </div>

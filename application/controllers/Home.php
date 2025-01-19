@@ -16,7 +16,6 @@ class Home extends CI_Controller
 	{
 		$data = [
 			'title' => 'Dashboard',
-			'user' =>  $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
 			'total_rows' => $this->Home_model->countAllPeoples(),
 			'total_rows_transaksi' => $this->Home_model->countAllTransaksi(),
 			'transaksi' => $this->Home_model->getAllTransaksi(),
@@ -53,7 +52,4 @@ class Home extends CI_Controller
 			$orientation
 		);
 	}
-
-
-
 }

@@ -1,3 +1,4 @@
+<?php $profile = $this->session->userdata('image') == null ? "default.png" : $this->session->userdata('image'); ?>
 <!-- Navbar -->
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -19,13 +20,13 @@
             <!-- Place this tag where you want the button to render. -->
 
             <li class="nav-item lh-1 me-2">
-                <span class="fw-semibold d-block"><?= $user['nama']; ?></span>
+                <span class="fw-semibold d-block"><?= $this->session->userdata('nama'); ?></span>
             </li>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" alt class="w-px-40 h-auto rounded-circle" />
+                        <img src="<?= base_url('assets/img/profile/') . $profile; ?>" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -34,12 +35,12 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" alt class="w-px-40 h-auto rounded-circle" />
+                                        <img src="<?= base_url('assets/img/profile/') . $profile; ?>" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block"><?= $user['nama'] ?></span>
-                                    <small class="text-muted"><?= $user['user_role'] ?></small>
+                                    <span class="fw-semibold d-block"><?= $this->session->userdata('nama'); ?></span>
+                                    <small class="text-muted"><?= $this->session->userdata('user_role'); ?></small>
                                 </div>
                             </div>
                         </a>

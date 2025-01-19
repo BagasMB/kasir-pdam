@@ -16,7 +16,6 @@ class Password extends CI_Controller
     {
         $data = [
             'title' => 'Account | Password',
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array()
         ];
 
         $this->form_validation->set_rules('password_lama', 'Password Lama', 'trim|required');

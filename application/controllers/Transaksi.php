@@ -18,7 +18,6 @@ class Transaksi extends CI_Controller
     {
         $data['title'] = 'Transaksi | Pembayaran';
         $data['title_halaman'] = 'Pembayaran';
-        $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
         $data['bayar'] = $this->Transaksi_model->getAllTransaksi();
         if ($this->input->post('keyword')) {
             $data['bayar'] = $this->Transaksi_model->cariDataTransaksi();

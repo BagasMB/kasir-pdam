@@ -18,7 +18,6 @@ class User extends CI_Controller
     {
         $data = [
             'title' => 'Halaman | User',
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'akun' => $this->User_model->getAllUser()
         ];
         $this->template->load('layout/template', 'user/user', $data);
@@ -49,17 +48,7 @@ class User extends CI_Controller
             $this->session->set_flashdata('gagal', 'Yahh, Username sudah digunakan!!!');
             redirect('user');
         } else {
-            $adduser = [
-                'username' => $this->input->post('username', true),
-                'password' => $this->input->post('password', true),
-                'image' => 'default.png',
-                'nama' => $this->input->post('nama', true),
-                'user_role' => $this->input->post('user_role', true),
-                'status' => 'Aktif',
-                'date_created' => time()
-            ];
-
-            $this->db->insert('user', $adduser);
+            $this->User_model->tambahUser();
             $this->session->set_flashdata('flash', 'Berhasil DiTambah');
             redirect('user');
         }

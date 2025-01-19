@@ -9,7 +9,6 @@ class MyProfile extends CI_Controller
         if ($this->session->userdata('username') == null) {
             redirect('auth');
         }
-        $this->load->model('User_model');
     }
 
     public function index()
@@ -17,7 +16,6 @@ class MyProfile extends CI_Controller
         $data = [
             'title' => 'Account | My Profile',
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
-            'akun' => $this->User_model->getAllUser()
         ];
 
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -26,40 +24,34 @@ class MyProfile extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->template->load('layout/template', 'myprofile', $data);
         } else {
-            $user_id = $this->input->post('user_id');
-            $username = $this->input->post('username');
             $nama = $this->input->post('nama');
-            $status = $this->input->post('status');
-            $user_role = $this->input->post('user_role');
-
-            $upload_image = $_FILES['image']['name'];
-
-            if ($upload_image) {
-                $config['allowed_types'] = 'jpeg|jpg|png';
-                $config['max_size']      = '2048';
-                $config['upload_path']   = './assets/img/profile/';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('image')) {
-                    $old_image = $dat['user']['image'];
-                    if ($old_image != 'default.png') {
-                        unlink(FCPATH . 'assets/img/profile/' . $old_image);
-                    }
-                    $new_image = $this->upload->data('file_name');
-                    $this->db->set('image', $new_image);
-                } else {
-                    echo $this->upload->display_errors();
-                }
+            $namaFoto = $this->input->post('namafoto');
+            if ($namaFoto == null) {
+                $namaFoto = date('YmdHis') . '.jpg';
             }
+            $config['allowed_types'] = 'jpeg|jpg|png';
+            $config['max_size']      = '2048';
+            $config['upload_path']   = './assets/img/profile/';
+            $config['overwrite']     = true;
+            $config['file_name']     = $namaFoto;
+            $this->load->library('upload', $config);
 
-            $this->db->set('username', $username);
-            $this->db->set('nama', $nama);
-            $this->db->set('status', $status);
-            $this->db->set('user_role', $user_role);
+            if (!$this->upload->do_upload('image')) {
+                $error = array('error', $this->upload->display_errors());
+                // die;
+                $data1 = ['nama' => $nama];
 
-            $this->db->where('user_id', $user_id);
-            $this->db->update('user');
+                $this->session->set_userdata($data1);
+                $where = ['user_id' => $this->input->post('user_id')];
+                $this->db->update('user', $data1, $where);
+            } else {
+                $data3 = array('upload_data' => $this->upload->data());
+                $data1 = ['nama' => $nama, 'image' => $namaFoto];
+
+                $where = ['user_id' => $this->input->post('user_id')];
+                $this->db->update('user', $data1, $where);
+                $this->session->set_userdata($data1);
+            }
 
             $this->session->set_flashdata('flash', 'Berhasil DiEdit');
             redirect('myprofile');

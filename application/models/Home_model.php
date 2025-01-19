@@ -6,7 +6,7 @@ class Home_model extends CI_Model
         $this->db->select('*');
         $this->db->order_by('tanggal_transaksi DESC');
         $this->db->from('transaksi');
-        $this->db->join('pelanggan', 'transaksi.pelanggan_id = pelanggan.pelanggan_id');
+        $this->db->join('pelanggan', 'transaksi.nomor_pelanggan = pelanggan.nomor_pelanggan');
         return $this->db->get('')->result_array();
     }
 
@@ -25,7 +25,7 @@ class Home_model extends CI_Model
         $this->db->select('*');
         $this->db->order_by('tanggal_transaksi DESC');
         $this->db->from('transaksi');
-        $this->db->join('pelanggan', 'transaksi.pelanggan_id = pelanggan.pelanggan_id');
+        $this->db->join('pelanggan', 'transaksi.nomor_pelanggan = pelanggan.nomor_pelanggan');
         $this->db->where('tanggal_transaksi >=', $tanggal1);
         $this->db->where('tanggal_transaksi <=', $tanggal2);
         return $this->db->get()->result_array();

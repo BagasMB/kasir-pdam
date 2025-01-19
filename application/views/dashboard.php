@@ -8,10 +8,10 @@
                 <div class="d-flex align-items-end row">
                     <div class="col-sm-7">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Welcome <?= $user['nama']; ?> To The <?= $user['user_role']; ?> Page! 🎉</h5>
+                            <h5 class="card-title text-primary">Selamat Datang Di Aplikasi PDAM 🎉</h5>
                             <p class="mb-4">
-                                You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                                your profile.
+                                Anda Login Sebagai <?= $this->session->userdata('user_role'); ?>
+                                <span class="fw-bold"><?= $this->session->userdata('nama'); ?> </span>
                             </p>
 
                             <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
@@ -37,7 +37,7 @@
                             </div>
                             <span>Pelanggan</span>
                             <h3 class="card-title text-nowrapy mb-1"><?= $total_rows; ?></h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                            <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                             </div>
                             <span>Sales</span>
                             <h3 class="card-title text-nowrap mb-1"><?= $total_rows_transaksi; ?></h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                            <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> -->
                         </div>
                     </div>
                 </div>

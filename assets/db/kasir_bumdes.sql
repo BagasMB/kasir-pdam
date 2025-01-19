@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 30 Nov 2023 pada 23.59
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.0.28
+-- Host: localhost:3306
+-- Generation Time: Jan 19, 2025 at 06:11 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,208 +24,208 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
-  `pelanggan_id` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `no_wa` varchar(50) NOT NULL,
-  `dusun` varchar(30) NOT NULL,
-  `rt` int(5) NOT NULL,
-  `rw` int(5) NOT NULL,
-  `desa` varchar(30) NOT NULL,
-  `kecamatan` varchar(30) NOT NULL,
-  `kabupaten` varchar(30) NOT NULL,
-  `kategori` enum('R-01','R-02','K-01','K-02') NOT NULL COMMENT '''R-01 = standar'',''R-02 = keluarga miskin'',''K-01 = dinas/istansi'',''K-02 = tempat ibadah''',
-  `meter_awal` int(11) NOT NULL
+  `pelanggan_id` int NOT NULL,
+  `nomor_pelanggan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `jenis_kelamin` enum('Laki-Laki','Perempuan','Umum') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_wa` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `dusun` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `rt` int NOT NULL,
+  `rw` int NOT NULL,
+  `desa` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `kecamatan` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `kabupaten` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `kategori` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `meter_awal` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `pelanggan`
+-- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `jenis_kelamin`, `email`, `no_wa`, `dusun`, `rt`, `rw`, `desa`, `kecamatan`, `kabupaten`, `kategori`, `meter_awal`) VALUES
-(1, 'Bagass', 'Laki-Laki', 'bagasmahardikabudi2007@gmail.com', '0812345678', 'Padangan', 1, 7, 'Jungke', 'Karanganyar', 'Karanganyar', 'R-01', 1111),
-(2, 'YGYG', 'Perempuan', 'cobaan@gmail.com', '1234567890', 'Opo', 76, 767, 'hvh', 'vhv', 'hhv', 'R-01', 12);
+INSERT INTO `pelanggan` (`pelanggan_id`, `nomor_pelanggan`, `nama`, `jenis_kelamin`, `email`, `no_wa`, `dusun`, `rt`, `rw`, `desa`, `kecamatan`, `kabupaten`, `kategori`, `meter_awal`) VALUES
+(1, '000001', 'Bagass', 'Laki-Laki', 'bagasmahardikabudi2007@gmail.com', '0812345678', 'Padangan', 12, 7, 'Jungke', 'Karanganyar', 'Karanganyar', '1', 111),
+(2, '000002', 'Andika', 'Perempuan', 'cobaan@gmail.com', '1234567890', 'Opo', 76, 767, 'hvh', 'vhv', 'aaaaaaaaaaaaaaa', '2', 0),
+(3, '000003', 'Masjid Al-Hidayah', 'Umum', 'bgasah@gmail.com', '777877878', 'jewen', 2, 7, 'klans', 'hgvhv', 'gvgh', '4', 13),
+(4, '000004', 'Perpustakaan Jungke', 'Umum', 'perpusda@gmail.com', '387918', 'Bakae', 1, 2, 'Basa', 'Kakk', 'jk', '3', 12);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penggunaan_air`
+-- Table structure for table `penggunaan_air`
 --
 
 CREATE TABLE `penggunaan_air` (
-  `pengair_id` int(11) NOT NULL,
-  `pelanggan_id` int(11) NOT NULL,
+  `pengair_id` int NOT NULL,
+  `nomor_pelanggan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `pemakaian_perbulan` date NOT NULL,
-  `pemakaian_awal` int(11) NOT NULL,
-  `pemakaian_akhir` int(11) NOT NULL,
-  `status_pembayaran` enum('Sudah DiBayar','Belum Bayar') NOT NULL
+  `pemakaian_awal` int NOT NULL,
+  `pemakaian_akhir` int NOT NULL,
+  `status_pembayaran` enum('Sudah DiBayar','Belum Bayar') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `penggunaan_air`
+-- Dumping data for table `penggunaan_air`
 --
 
-INSERT INTO `penggunaan_air` (`pengair_id`, `pelanggan_id`, `pemakaian_perbulan`, `pemakaian_awal`, `pemakaian_akhir`, `status_pembayaran`) VALUES
-(1, 1, '2023-09-12', 0, 10, 'Sudah DiBayar'),
-(2, 1, '2023-09-12', 10, 15, 'Belum Bayar'),
-(3, 1, '2023-09-15', 15, 90, 'Belum Bayar'),
-(4, 2, '2023-09-15', 0, 10, 'Belum Bayar'),
-(5, 2, '2023-09-15', 10, 12, 'Sudah DiBayar'),
-(6, 2147483647, '2023-10-27', 6677, 766, 'Belum Bayar'),
-(7, 5656, '2023-10-27', 6556, 565, 'Belum Bayar'),
-(8, 1, '2023-10-27', 12, 12, 'Belum Bayar'),
-(9, 1, '2023-11-22', 111, 1111, 'Belum Bayar');
+INSERT INTO `penggunaan_air` (`pengair_id`, `nomor_pelanggan`, `pemakaian_perbulan`, `pemakaian_awal`, `pemakaian_akhir`, `status_pembayaran`) VALUES
+(1, '000001', '0000-00-00', 0, 100, 'Sudah DiBayar'),
+(2, '000003', '0000-00-00', 0, 12, 'Sudah DiBayar'),
+(3, '000003', '0000-00-00', 12, 12, 'Sudah DiBayar'),
+(4, '000003', '0000-00-00', 12, 13, 'Sudah DiBayar'),
+(5, '000004', '0000-00-00', 0, 12, 'Sudah DiBayar'),
+(6, '000001', '0000-00-00', 100, 111, 'Belum Bayar');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tarif`
+-- Table structure for table `tarif`
 --
 
 CREATE TABLE `tarif` (
-  `tarif_id` int(11) NOT NULL,
-  `biaya` enum('1000','1500','2000','') NOT NULL
+  `tarif_id` int NOT NULL,
+  `nama_tarif` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `biaya` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tarif`
+-- Dumping data for table `tarif`
 --
 
-INSERT INTO `tarif` (`tarif_id`, `biaya`) VALUES
-(1, '1000'),
-(2, '1500'),
-(3, '2000');
+INSERT INTO `tarif` (`tarif_id`, `nama_tarif`, `biaya`) VALUES
+(1, 'R-01 (Standar)', 2000),
+(2, 'R-02 (Keluarga Miskin)', 500),
+(3, 'K-01 (Dinas/Instansi)', 1500),
+(4, 'K-02  (Tempat Ibadah)', 1000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi`
+-- Table structure for table `transaksi`
 --
 
 CREATE TABLE `transaksi` (
-  `transaksi_id` int(20) NOT NULL,
-  `pelanggan_id` int(20) NOT NULL,
-  `pengair_id` int(11) NOT NULL,
+  `transaksi_id` int NOT NULL,
+  `nomor_pelanggan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `pengair_id` int NOT NULL,
   `jam_transaksi` time NOT NULL,
   `tanggal_transaksi` date NOT NULL,
   `total_pembayaran` double NOT NULL,
-  `bayar` int(11) NOT NULL,
-  `kembalian` int(11) NOT NULL
+  `bayar` int NOT NULL,
+  `kembalian` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `transaksi`
+-- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`transaksi_id`, `pelanggan_id`, `pengair_id`, `jam_transaksi`, `tanggal_transaksi`, `total_pembayaran`, `bayar`, `kembalian`) VALUES
-(1, 1, 1, '05:48:02', '2023-09-12', 50000, 50000, 0),
-(2, 1, 2, '13:42:34', '2023-09-12', 25000, 0, 0),
-(3, 1, 3, '13:41:23', '2023-09-15', 375000, 0, 0),
-(4, 2, 4, '13:54:12', '2023-09-15', 50000, 0, 0),
-(5, 2, 5, '13:54:31', '2023-09-15', 10000, 100000, 90000),
-(6, 2147483647, 6, '17:31:45', '2023-10-27', -29555000, 0, 0),
-(7, 5656, 7, '17:32:01', '2023-10-27', -29955000, 0, 0),
-(8, 1, 8, '17:45:50', '2023-10-27', 0, 0, 0),
-(9, 1, 9, '08:00:14', '2023-11-22', 5000000, 0, 0);
+INSERT INTO `transaksi` (`transaksi_id`, `nomor_pelanggan`, `pengair_id`, `jam_transaksi`, `tanggal_transaksi`, `total_pembayaran`, `bayar`, `kembalian`) VALUES
+(1, '000001', 1, '04:00:00', '0000-00-00', 200000, 200000, 0),
+(2, '000003', 2, '14:58:00', '2025-01-18', 12000, 12000, 0),
+(3, '000003', 3, '22:00:00', '2025-01-18', 0, 1, 1),
+(4, '000003', 4, '22:01:00', '2025-01-18', 1000, 1000, 0),
+(5, '000004', 5, '22:06:00', '2025-01-18', 18000, 18000, 0),
+(6, '000001', 6, '11:09:00', '2025-01-19', 22000, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
-  `user_id` int(10) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `image` varchar(100) NOT NULL,
-  `status` enum('Aktif','Mati') NOT NULL,
-  `user_role` enum('Kasir','Manager','Admin','Petugas') NOT NULL COMMENT 'Petugas = \r\nPetugas Pencatat Meteran',
-  `date_created` int(11) NOT NULL
+  `user_id` int NOT NULL,
+  `username` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('Aktif','Mati') COLLATE utf8mb4_general_ci NOT NULL,
+  `user_role` enum('Kasir','Manager','Admin','Petugas') COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Petugas = \r\nPetugas Pencatat Meteran',
+  `date_created` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `image`, `status`, `user_role`, `date_created`) VALUES
-(1, 'admin', 'ya', 'Bagass', '_2f8ee1d8-cb5d-4913-a81e-9a61eede8eea.jpeg', 'Aktif', 'Admin', 1687042748),
-(2, 'kasir', 'ya', 'Radityo', 'default.png', 'Aktif', 'Kasir', 1687042748),
-(21, 'admin1', '123', 'cgfghh', 'default.png', 'Aktif', 'Kasir', 1700789512);
+(1, 'admin', 'ya', 'Bagas', '20250119014337.jpg', 'Aktif', 'Admin', 1687042748),
+(2, 'kasir', 'ya', 'Radityo', '20250119043437.jpg', 'Aktif', 'Kasir', 1687042748),
+(21, 'azalea', 'ya', 'azalee', '', 'Aktif', 'Kasir', 1700789512),
+(22, 'zee', 'ya', 'aziizii', '20250119032709.jpg', 'Aktif', 'Kasir', 1737257074);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`pelanggan_id`);
 
 --
--- Indeks untuk tabel `penggunaan_air`
+-- Indexes for table `penggunaan_air`
 --
 ALTER TABLE `penggunaan_air`
   ADD PRIMARY KEY (`pengair_id`);
 
 --
--- Indeks untuk tabel `tarif`
+-- Indexes for table `tarif`
 --
 ALTER TABLE `tarif`
   ADD PRIMARY KEY (`tarif_id`);
 
 --
--- Indeks untuk tabel `transaksi`
+-- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`transaksi_id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggan`
+-- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pelanggan_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `penggunaan_air`
+-- AUTO_INCREMENT for table `penggunaan_air`
 --
 ALTER TABLE `penggunaan_air`
-  MODIFY `pengair_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `pengair_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `tarif`
+-- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `tarif_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tarif_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi`
+-- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `transaksi_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

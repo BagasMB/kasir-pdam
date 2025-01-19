@@ -1,8 +1,4 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div id="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-    <div id="type-error" data-flashdata="<?= $this->session->flashdata('gagal'); ?>"></div>
-
-
     <!-- Bordered Table -->
     <div class="card card-responsive mb-3">
 
@@ -35,32 +31,19 @@
                                 <td><?= $kun['username']; ?></td>
                                 <td><?= $kun['nama']; ?></td>
                                 <td>
-                                    <?php if ($kun['status'] == "Aktif") : ?>
-
-                                        <span class="badge bg-label-success me-1">
-                                            <?= $kun['status']; ?>
-                                        </span>
-
-                                    <?php elseif ($kun['status'] == "Mati") :  ?>
-
-                                        <span class="badge bg-label-danger me-1">
-                                            <?= $kun['status']; ?>
-                                        </span>
-
-                                    <?php endif; ?>
+                                    <span class="badge bg-label-<?= $kun['status'] == "Aktif" ? "success" : "danger"; ?> me-1">
+                                        <?= $kun['status']; ?>
+                                    </span>
                                 </td>
                                 <td><?= $kun['user_role']; ?></td>
                                 <td>
-                                    <div class="dropdown text-center">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modalEditUser<?= $kun['user_id']; ?>"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                            <div class="dropdown-item" id="btn-hapus" href="<?= base_url('user/deleteUser/' . $kun['user_id']); ?>"><i class="bx bx-trash me-1"></i> Delete</di>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalEditUser<?= $kun['user_id']; ?>">
+                                        <i class="bx bx-edit"></i>
+                                    </button>
+                                    <?php if ($this->session->userdata('username') != $kun['username']): ?>
+                                        <a id="btn-hapus" class="btn btn-danger btn-sm" href="<?= base_url('user/deleteUser/' . $kun['user_id']); ?>"><i class="bx bx-trash"></i></a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
 
@@ -96,18 +79,16 @@
                                                     <div class="col-6 mb-2 text-start">
                                                         <label class="form-label">Status Akun</label>
                                                         <select class="form-select" name="status">
-                                                            <option selected><?= $kun['status'] ?></option>
-                                                            <option value="Aktif">Aktif</option>
-                                                            <option value="Mati">Mati</option>
+                                                            <option value="Aktif" <?= $kun['status'] == "Aktif" ? "selected" : ""; ?>>Aktif</option>
+                                                            <option value="Mati" <?= $kun['status'] == "Mati" ? "selected" : ""; ?>>Mati</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-6 mb-2 text-start">
                                                         <label class="form-label">User Role</label>
                                                         <select class="form-select" name="user_role">
-                                                            <option selected><?= $kun['user_role'] ?></option>
-                                                            <option value="Kasir">Kasir</option>
+                                                            <option value="Kasir" <?= $kun['user_role'] == "Kasir" ? "selected" : ""; ?>>Kasir</option>
                                                             <!-- <option value="Manager">Manager</option> -->
-                                                            <option value="Admin">Admin</option>
+                                                            <option value="Admin" <?= $kun['user_role'] == "Admin" ? "selected" : ""; ?>>Admin</option>
                                                             <!-- <option value="Petugas Pencatat Meteran">Petugas Pencatat Meteran</option> -->
                                                         </select>
                                                     </div>

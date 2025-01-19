@@ -36,8 +36,13 @@ class Auth extends CI_Controller
             if ($user['status'] == 'Aktif') {
                 if ($password == $user['password']) {
                     $data = [
-                        'username' => $user['username'],
-                        'user_role' => $user['user_role']
+                        'user_id'       => $user['user_id'],
+                        'username'      => $user['username'],
+                        'nama'          => $user['nama'],
+                        'image'         => $user['image'],
+                        'status'        => $user['status'],
+                        'user_role'     => $user['user_role'],
+                        'date_created'  => $user['date_created']
                     ];
                     $this->session->set_userdata($data);
                     redirect('home');

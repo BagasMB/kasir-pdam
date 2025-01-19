@@ -17,9 +17,7 @@
         <!-- Dashboard -->
         <?php $menu = $this->uri->segment(1);
         $menu2 = $this->uri->segment(2); ?>
-        <li class="menu-item <?php if ($menu == 'home') {
-                                    echo "active";
-                                } ?>">
+        <li class="menu-item <?= $menu == 'home' ? "active" : ($menu == "" ?  "active" : ""); ?>">
             <a href="<?= base_url('home') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -27,54 +25,42 @@
         </li>
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pelanggan</span></li>
-        <li class="menu-item <?php if ($menu == 'pelanggan') {
-                                    echo "active";
-                                } ?>">
+        <li class="menu-item <?= $menu == 'pelanggan' ? "active" : ""; ?>">
             <a href="<?= base_url('pelanggan') ?>" class="menu-link">
                 <i class="menu-icon tf-icons fa-solid fa-people-line"></i>
                 <div data-i18n="Analytics">Daftar Pelanggan</div>
             </a>
         </li>
-
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Penggunaan Air</span></li>
-        <!-- <li class="menu-item <?php if ($menu == 'penggunaanair') {
-                                        echo "active";
-                                    } ?>">
-                <a href="<?= base_url('penggunaanair') ?>" class="menu-link">
-                    <i class="menu-icon tf-icons fa-solid fa-people-line"></i>
-                    <div data-i18n="Analytics">Penggunaan Air</div>
-                </a>
-            </li> -->
-        <li class="menu-item  <?php if ($menu2 == 'input') {
-                                    echo "active";
-                                } ?>">
-            <a href="<?= base_url('penggunaanair/input') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Analytics">Input Penggunaan</div>
+        <li class="menu-item <?= $menu == 'tarif' ? "active" : ""; ?>">
+            <a href="<?= base_url('tarif') ?>" class="menu-link">
+                <i class="menu-icon tf-icons fa-solid fa-money-bill"></i>
+                <div data-i18n="Analytics">Tarif</div>
             </a>
         </li>
-        <li class="menu-item  <?php if ($menu2 == 'sudahBayar') {
-                                    echo "active";
-                                } ?>">
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Penggunaan Air</span></li>
+        <li class="menu-item <?= $menu == 'penggunaanair' && $menu2 != "sudahBayar" && $menu2 != "belumBayar" ? "active" : ""; ?>">
+            <a href="<?= base_url('penggunaanair') ?>" class="menu-link">
+                <i class="menu-icon tf-icons fa-solid fa-water"></i>
+                <div data-i18n="Analytics">Penggunaan Air</div>
+            </a>
+        </li>
+        <li class="menu-item  <?= $menu2 == 'sudahBayar' ? "active" : ""; ?>">
             <a href="<?= base_url('penggunaanair/sudahBayar') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Sudah Bayar</div>
             </a>
         </li>
-        <li class="menu-item <?php if ($menu2 == 'belumBayar') {
-                                    echo "active";
-                                } ?>">
+        <li class="menu-item <?= $menu2 == 'belumBayar' ? "active" : ""; ?>">
             <a href="<?= base_url('penggunaanair/belumBayar') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Analytics">Belum Bayar</div>
             </a>
         </li>
 
-        <?php if ($user['user_role'] == 'Kasir') : ?>
+        <?php if ($this->session->userdata('user_role') == 'Kasir') : ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
-            <li class="menu-item <?php if ($menu == 'transaksi') {
-                                        echo "active";
-                                    } ?>">
+            <li class="menu-item <?= $menu == 'transaksi' ? "active" : ""; ?>">
                 <a href="<?= base_url('transaksi') ?>" class="menu-link">
                     <i class='menu-icon tf-icons bx bx-wallet'></i>
                     <div data-i18n="Analytics">Pembayaran</div>
@@ -82,11 +68,9 @@
             </li>
         <?php endif; ?>
 
-        <?php if ($user['user_role'] == 'Admin') : ?>
+        <?php if ($this->session->userdata('user_role') == 'Admin') : ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
-            <li class="menu-item <?php if ($menu == 'user') {
-                                        echo "active";
-                                    } ?>">
+            <li class="menu-item <?= $menu == 'user' ? "active" : ""; ?>">
                 <a href="<?= base_url('user') ?>" class="menu-link">
                     <i class="menu-icon tf-icons fa-solid fa-users"></i>
                     <div data-i18n="Analytics">Daftar User</div>
