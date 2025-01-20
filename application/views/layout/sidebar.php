@@ -58,7 +58,7 @@
             </a>
         </li>
 
-        <?php if ($this->session->userdata('user_role') == 'Kasir') : ?>
+        <?php if ($this->session->userdata('user_role') == 'Kasir' || $this->session->userdata('user_role') == 'Admin') : ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
             <li class="menu-item <?= $menu == 'transaksi' ? "active" : ""; ?>">
                 <a href="<?= base_url('transaksi') ?>" class="menu-link">

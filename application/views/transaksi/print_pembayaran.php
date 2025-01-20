@@ -24,6 +24,17 @@
             border-color: black;
         }
     </style>
+    <script>
+        // Menutup halaman jika pengguna membatalkan dialog cetak
+        window.onafterprint = function() {
+            window.close();
+        };
+
+        // Menangani pengguna yang membatalkan dengan menutup halaman secara manual
+        window.onbeforeunload = function(e) {
+            return "Apakah Anda yakin ingin meninggalkan halaman ini?";
+        };
+    </script>
 </head>
 
 <body style='font-family:tahoma; font-size:8pt;' onload="javascript:window.print()">
@@ -103,4 +114,4 @@
     </center>
 </body>
 
-</html> 
+</html>

@@ -39,10 +39,10 @@ class PenggunaanAir extends CI_Controller
     public function input()
     {
         $this->form_validation->set_rules('pemakaian_akhir', 'Pemakaian Akhir', 'trim|required|numeric');
+        $this->form_validation->set_rules('pemakaian_perbulan', 'Pemakaian Bulan', 'trim|required');
 
         $this->load->model('Pelanggan_model');
-        $getPelanggan =   $this->Pelanggan_model->getDetailPelanggan($this->input->post('nomor_pelanggan'));
-        // var_dump($getPelanggan->meter_awal);die;
+        $getPelanggan = $this->Pelanggan_model->getDetailPelanggan($this->input->post('nomor_pelanggan'));
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('gagal', 'Data Belum di isi');

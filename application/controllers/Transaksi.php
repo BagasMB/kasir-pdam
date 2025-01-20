@@ -8,8 +8,6 @@ class Transaksi extends CI_Controller
         parent::__construct();
         if ($this->session->userdata('username') == null) {
             redirect('auth');
-        } elseif ($this->session->userdata('user_role') != 'Kasir') {
-            redirect('auth/block');
         }
         $this->load->model('Transaksi_model');
     }
@@ -39,10 +37,10 @@ class Transaksi extends CI_Controller
         }
     }
 
-    public function print_pembayaran($transaksi_id)
+    public function print_pembayaran($kode_transaksi)
     {
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['bayar'] = $this->Transaksi_model->getByIdTransaksi($transaksi_id);
+        $data['bayar'] = $this->Transaksi_model->getByIdTransaksi($kode_transaksi);
 
         $this->load->view('transaksi/print_pembayaran', $data);
     }

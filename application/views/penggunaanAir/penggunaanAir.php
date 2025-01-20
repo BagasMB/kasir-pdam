@@ -16,6 +16,10 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="html5-month-input" class="form-label">Pemakaian Bulan</label>
+                        <input class="form-control" type="month" name="pemakaian_perbulan" id="html5-month-input" />
+                    </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Pemakaian Akhir</label>
                         <input type="number" name="pemakaian_akhir" class="form-control" placeholder="Pemakaian Akhir" autocomplete="off" />

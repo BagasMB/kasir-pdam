@@ -68,15 +68,19 @@
           <tbody>
             <?php foreach ($transaksi as $value) : ?>
               <tr>
-                <td><?= $value->jam_transaksi; ?> <?= $value->tanggal_transaksi; ?></td>
+                <td>
+                  <?php if ($value->tanggal_transaksi != "0000-00-00") : ?>
+                    <?= $value->jam_transaksi; ?>, <?= date('d F Y', strtotime($value->tanggal_transaksi)); ?>
+                  <?php else : ?>
+                    <span class="badge bg-label-danger me-1">Belum Bayar</span>
+                  <?php endif; ?>
+                </td>
                 <td>Rp. <?= number_format($value->total_pembayaran); ?></td>
                 <td>Rp. <?= number_format($value->bayar); ?></td>
                 <td>Rp. <?= number_format($value->kembalian); ?></td>
                 <td>
-                  <a href="/student/cetak-nota/{{ $list->student_id }}/{{ $list->id }}"
-                    type="button" class="btn btn-primary btn-sm" target="_blank">
-                    Cetak Nota
-                  </a>
+
+                  <a href="<?= base_url('transaksi/print_pembayaran/' . $value->kode_transaksi); ?>" class="btn btn-danger btn-sm" target="_blank"><i class='bx bx-printer'></i></a>
                 </td>
               </tr>
             <?php endforeach; ?>

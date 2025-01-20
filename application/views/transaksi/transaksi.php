@@ -10,7 +10,7 @@
                 <table id="myTable" class="table text-nowrap">
                     <thead>
                         <tr>
-                            <th>Id Transaksi</th>
+                            <th>#</th>
                             <th>Nama</th>
                             <th>Tanggal Transaksi</th>
                             <th>Total Pembayaran</th>
@@ -23,23 +23,29 @@
                         <?php
                         foreach ($bayar as $yar) : ?>
                             <tr>
-                                <td><?= $yar['transaksi_id']; ?></td>
+                                <td><?= $yar['kode_transaksi']; ?></td>
                                 <td><?= $yar['nama']; ?></td>
-                                <td><?= $yar['jam_transaksi']; ?> <?= $yar['tanggal_transaksi']; ?></td>
-                                <td>Rp <?= number_format($yar['total_pembayaran']); ?></td>
-                                <td>Rp <?= number_format($yar['bayar']); ?></td>
-                                <td>Rp <?= number_format($yar['kembalian']); ?></td>
+                                <td>
+                                    <?php if ($yar['tanggal_transaksi'] != "0000-00-00") : ?>
+                                        <?= $yar['jam_transaksi']; ?>, <?= date('d F Y', strtotime($yar['tanggal_transaksi'])); ?>
+                                    <?php else : ?>
+                                        <span class="badge bg-label-danger me-1">Belum Bayar</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>Rp. <?= number_format($yar['total_pembayaran']); ?></td>
+                                <td>Rp. <?= number_format($yar['bayar']); ?></td>
+                                <td>Rp. <?= number_format($yar['kembalian']); ?></td>
                                 <td>
                                     <?php if ($yar['bayar'] > 0) : ?>
-                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPembayaran<?= $yar['transaksi_id'] ?>"><i class='bx bx-wallet me-1'></i></button>
-                                        <a href="<?= base_url('transaksi/print_pembayaran/' . $yar['transaksi_id']); ?>" class="btn btn-danger btn-sm" target="_blank"><i class='bx bx-printer'></i></a>
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPembayaran<?= $yar['transaksi_id']; ?>"><i class='bx bx-wallet'></i></button>
+                                        <a href="<?= base_url('transaksi/print_pembayaran/' . $yar['kode_transaksi']); ?>" class="btn btn-danger btn-sm" target="_blank"><i class='bx bx-printer'></i></a>
                                     <?php else : ?>
-                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPembayaran<?= $yar['transaksi_id'] ?>"><i class='bx bx-wallet me-1'></i></button>
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPembayaran<?= $yar['transaksi_id']; ?>"><i class='bx bx-wallet'></i></button>
                                     <?php endif; ?>
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="modalPembayaran<?= $yar['transaksi_id'] ?>" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+                            <div class="modal fade" id="modalPembayaran<?= $yar['transaksi_id']; ?>" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">

@@ -7,10 +7,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="myTable" class="table text-nowrap" width="100%">
+                <table id="myTable" class="table" width="100%">
                     <thead>
                         <tr>
-                            <th>Id Transaksi</th>
+                            <th>#</th>
                             <th>Nomor Pelanggan</th>
                             <th>Nama</th>
                             <th>Pemakaian Bulan</th>
@@ -20,14 +20,15 @@
                             <!-- <th>Actions</th> -->
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody>
                         <?php
+                        $no = 1;
                         foreach ($bayar as $yar) : ?>
                             <tr>
-                                <td><?= $yar['pengair_id']; ?></td>
+                                <td><?= $no++; ?></td>
                                 <td><?= $yar['nomor_pelanggan']; ?></td>
                                 <td><?= $yar['nama']; ?></td>
-                                <td><?= $yar['pemakaian_perbulan']; ?></td>
+                                <td><?= date('F Y', strtotime($yar['pemakaian_perbulan'])); ?></td>
                                 <td><?= $yar['pemakaian_awal']; ?></td>
                                 <td><?= $yar['pemakaian_akhir']; ?></td>
                                 <!-- <td>

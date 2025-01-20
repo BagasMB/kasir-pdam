@@ -35,7 +35,8 @@ class Home_model extends CI_Model
     {
         $this->db->select('sum(total_pembayaran) as total')->from('transaksi');
         $this->db->where('tanggal_transaksi <', $tanggal1);
-        return $this->db->get()->row()->total;
-        
+        $result = $this->db->get()->row()->total;
+
+        return $result ?? 0;
     }
 }

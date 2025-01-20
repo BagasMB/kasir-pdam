@@ -67,7 +67,7 @@
                                                     </div>
                                                     <div class="col mb-2 text-start form-password-toggle">
                                                         <label class="form-label">Password <strong class="text-danger">*</strong></label>
-                                                        <div class="input-group">
+                                                        <div class="input-group input-group-merge">
                                                             <input type="password" name="password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" value="<?= $kun['password'] ?>" autocomplete="off">
                                                             <div class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></div>
                                                         </div>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="col mb-2 text-start form-password-toggle">
                                 <label class="form-label">Password <strong class="text-danger">*</strong></label>
-                                <div class="input-group">
+                                <div class="input-group input-group-merge">
                                     <input type="password" name="password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" autocomplete="off">
                                     <div class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></div>
                                 </div>

@@ -33,12 +33,17 @@ class Transaksi_model extends CI_Model
 
     public function bayar()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $bayar = $this->input->post('bayar');
         $total_bayar = $this->input->post('total_pembayaran');
+        $jam_transaksi = date('H:i:s');
+        $waktu_tanggal = date('Y-m-d');
 
         $data = [
             'transaksi_id' => $this->input->post('transaksi_id', true),
-            'bayar' => $this->input->post('bayar', true),
+            'jam_transaksi' => $jam_transaksi,
+            'tanggal_transaksi' => $waktu_tanggal,
+            'bayar' => $bayar,
             'kembalian' => $bayar - $total_bayar
         ];
 
@@ -53,9 +58,10 @@ class Transaksi_model extends CI_Model
         $this->db->update('penggunaan_air', $up);
     }
 
-    public function getByIdTransaksi($transaksi_id)
+    public function getByIdTransaksi($kode_transaksi)
     {
+        $this->db->where('kode_transaksi', $kode_transaksi);
         $this->db->join('pelanggan', 'transaksi.nomor_pelanggan = pelanggan.nomor_pelanggan');
-        return $this->db->get_where('transaksi', ['transaksi_id' => $transaksi_id])->row_array();
+        return $this->db->get('transaksi')->row_array();
     }
 }

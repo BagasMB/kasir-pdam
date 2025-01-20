@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 19, 2025 at 06:11 AM
+-- Generation Time: Jan 20, 2025 at 06:33 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.12
 
@@ -49,10 +49,10 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`pelanggan_id`, `nomor_pelanggan`, `nama`, `jenis_kelamin`, `email`, `no_wa`, `dusun`, `rt`, `rw`, `desa`, `kecamatan`, `kabupaten`, `kategori`, `meter_awal`) VALUES
-(1, '000001', 'Bagass', 'Laki-Laki', 'bagasmahardikabudi2007@gmail.com', '0812345678', 'Padangan', 12, 7, 'Jungke', 'Karanganyar', 'Karanganyar', '1', 111),
+(1, '000001', 'Bagass', 'Laki-Laki', 'bagasmahardikabudi2007@gmail.com', '0812345678', 'Padangan', 12, 7, 'Jungke', 'Karanganyar', 'Karanganyar', '1', 100),
 (2, '000002', 'Andika', 'Perempuan', 'cobaan@gmail.com', '1234567890', 'Opo', 76, 767, 'hvh', 'vhv', 'aaaaaaaaaaaaaaa', '2', 0),
-(3, '000003', 'Masjid Al-Hidayah', 'Umum', 'bgasah@gmail.com', '777877878', 'jewen', 2, 7, 'klans', 'hgvhv', 'gvgh', '4', 13),
-(4, '000004', 'Perpustakaan Jungke', 'Umum', 'perpusda@gmail.com', '387918', 'Bakae', 1, 2, 'Basa', 'Kakk', 'jk', '3', 12);
+(3, '000003', 'Masjid Al-Hidayah', 'Umum', 'bgasah@gmail.com', '777877878', 'jewen', 2, 7, 'klans', 'hgvhv', 'gvgh', '4', 0),
+(4, '000004', 'Perpustakaan Jungke', 'Umum', 'perpusda@gmail.com', '387918', 'Bakae', 1, 2, 'Basa', 'Kakk', 'jk', '3', 30);
 
 -- --------------------------------------------------------
 
@@ -74,12 +74,8 @@ CREATE TABLE `penggunaan_air` (
 --
 
 INSERT INTO `penggunaan_air` (`pengair_id`, `nomor_pelanggan`, `pemakaian_perbulan`, `pemakaian_awal`, `pemakaian_akhir`, `status_pembayaran`) VALUES
-(1, '000001', '0000-00-00', 0, 100, 'Sudah DiBayar'),
-(2, '000003', '0000-00-00', 0, 12, 'Sudah DiBayar'),
-(3, '000003', '0000-00-00', 12, 12, 'Sudah DiBayar'),
-(4, '000003', '0000-00-00', 12, 13, 'Sudah DiBayar'),
-(5, '000004', '0000-00-00', 0, 12, 'Sudah DiBayar'),
-(6, '000001', '0000-00-00', 100, 111, 'Belum Bayar');
+(1, '000001', '2025-01-20', 0, 100, 'Sudah DiBayar'),
+(2, '000004', '2025-01-20', 0, 30, 'Belum Bayar');
 
 -- --------------------------------------------------------
 
@@ -111,6 +107,7 @@ INSERT INTO `tarif` (`tarif_id`, `nama_tarif`, `biaya`) VALUES
 
 CREATE TABLE `transaksi` (
   `transaksi_id` int NOT NULL,
+  `kode_transaksi` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `nomor_pelanggan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `pengair_id` int NOT NULL,
   `jam_transaksi` time NOT NULL,
@@ -124,13 +121,9 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`transaksi_id`, `nomor_pelanggan`, `pengair_id`, `jam_transaksi`, `tanggal_transaksi`, `total_pembayaran`, `bayar`, `kembalian`) VALUES
-(1, '000001', 1, '04:00:00', '0000-00-00', 200000, 200000, 0),
-(2, '000003', 2, '14:58:00', '2025-01-18', 12000, 12000, 0),
-(3, '000003', 3, '22:00:00', '2025-01-18', 0, 1, 1),
-(4, '000003', 4, '22:01:00', '2025-01-18', 1000, 1000, 0),
-(5, '000004', 5, '22:06:00', '2025-01-18', 18000, 18000, 0),
-(6, '000001', 6, '11:09:00', '2025-01-19', 22000, 0, 0);
+INSERT INTO `transaksi` (`transaksi_id`, `kode_transaksi`, `nomor_pelanggan`, `pengair_id`, `jam_transaksi`, `tanggal_transaksi`, `total_pembayaran`, `bayar`, `kembalian`) VALUES
+(1, '2501201', '000001', 1, '11:13:21', '2025-01-20', 200000, 200000, 0),
+(2, '2501202', '000004', 2, '00:00:00', '0000-00-00', 45000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -207,7 +200,7 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT for table `penggunaan_air`
 --
 ALTER TABLE `penggunaan_air`
-  MODIFY `pengair_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pengair_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tarif`
@@ -219,7 +212,7 @@ ALTER TABLE `tarif`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `transaksi_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
